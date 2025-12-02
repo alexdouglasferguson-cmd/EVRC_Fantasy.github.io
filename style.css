@@ -1,0 +1,117 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #0044aa; /* Deep Blue - Tennis Court */
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin: 0 0 5px 0;
+}
+
+main {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+#loading {
+    text-align: center;
+    padding: 40px;
+    font-size: 1.2em;
+    color: #007bff;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #007bff; /* Accent Blue */
+    color: white;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+tr:nth-child(even) {
+    background-color: #f8f8f8;
+}
+
+.rank-cell {
+    font-weight: bold;
+    text-align: center;
+}
+
+.gold { background-color: #FFD700; color: #333; }
+.silver { background-color: #C0C0C0; color: #333; }
+.bronze { background-color: #CD7F32; color: white; }
+
+/* Squad Section Styling */
+#squad-section {
+    margin-top: 40px;
+}
+
+#squad-section h2 {
+    color: #0044aa;
+    border-bottom: 2px solid #0044aa;
+    padding-bottom: 5px;
+}
+
+.manager-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 15px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.manager-card h3 {
+    margin-top: 0;
+    color: #28a745; /* Green for Team Name */
+}
+
+.roster-list {
+    list-style: none;
+    padding: 0;
+}
+
+.roster-list li {
+    padding: 5px 0;
+    border-bottom: 1px dotted #eee;
+    display: flex;
+    justify-content: space-between;
+}
+
+.player-price {
+    font-weight: bold;
+    color: #dc3545; /* Red for price */
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    margin-top: 30px;
+    color: #777;
+    font-size: 0.8em;
+}
