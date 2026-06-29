@@ -4,37 +4,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EVRC Fantasy League</title>
+    <title>EVRC Fantasy League — Wimbledon</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #FDFBF7; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-
-        .hero {
-            background: linear-gradient(135deg, #024B30 0%, #013320 100%);
-            color: white;
-            padding: 60px 0 40px;
-            margin-bottom: 20px;
-            border-bottom: 6px solid #CB5A36;
+        body {
+            background-color: #faf8f3;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* CORNY BANNER AD STYLING */
+        /* ── HERO ── */
+        .hero {
+            background-color: #1a4d2e;
+            color: white;
+            padding: 56px 0 44px;
+            margin-bottom: 0;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        /* subtle tennis-court line overlay */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px),
+                linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        .hero-inner { position: relative; z-index: 1; }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 600;
+            letter-spacing: -.01em;
+            margin-bottom: .3rem;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: #a8d8b0;
+        }
+
+        .hero .eyebrow {
+            font-size: .7rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.5);
+            margin-bottom: .5rem;
+        }
+
+        .hero .lead {
+            color: rgba(255,255,255,.6);
+            font-size: .9rem;
+            letter-spacing: .04em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-chips {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .hero-chip {
+            background: rgba(255,255,255,.1);
+            border: 1px solid rgba(255,255,255,.2);
+            color: rgba(255,255,255,.85);
+            padding: 5px 16px;
+            border-radius: 20px;
+            font-size: .75rem;
+            font-weight: 500;
+        }
+
+        /* ── PURPLE ACCENT BAR ── */
+        .purple-bar { height: 4px; background: #4b0082; }
+
+        /* ── STRAWBERRY TAGLINE ── */
+        .sac-strip {
+            background: linear-gradient(135deg, #fff5f5 0%, #fff 40%, #f5fff7 100%);
+            border-bottom: .5px solid #ece8e0;
+            padding: .55rem 1rem;
+            text-align: center;
+            font-size: .78rem;
+            color: #999;
+            font-style: italic;
+            letter-spacing: .03em;
+        }
+
+        /* ── SPONSOR BANNER ── */
         .sponsor-banner {
             background-color: #ffffff;
-            border: 2px dashed #ccc;
-            padding: 15px;
+            border: 2px dashed #e0c89a;
+            padding: 15px 24px;
             max-width: 600px;
-            margin: 0 auto 40px auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin: 28px auto 36px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.04);
             position: relative;
         }
         .ad-tag {
             position: absolute;
             top: -10px;
             left: 20px;
-            background: #f8d7da;
+            background: #fde8e8;
             color: #842029;
-            font-size: 0.65rem;
+            font-size: .65rem;
             text-transform: uppercase;
             padding: 2px 8px;
             border-radius: 4px;
@@ -47,88 +128,186 @@
             margin-top: 10px;
         }
 
+        /* ── TEAM CARDS ── */
         .card {
-            border: none;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-            margin-bottom: 25px;
-            transition: transform 0.2s;
+            border: .5px solid #e5e2db;
+            border-radius: 14px;
+            box-shadow: 0 3px 10px rgba(0,0,0,.05);
+            margin-bottom: 24px;
+            transition: transform .2s, box-shadow .2s;
             background-color: #ffffff;
+            overflow: hidden;
         }
-        .card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(0,0,0,.10);
+        }
 
-        .rank-1 { border-top: 6px solid #FFD700; background: #FFFEFA; }
-        .rank-2 { border-top: 6px solid #C0C0C0; }
-        .rank-3 { border-top: 6px solid #CD7F32; }
+        /* coloured top accent bar per rank */
+        .card::before {
+            content: '';
+            display: block;
+            height: 5px;
+        }
+        .rank-1::before { background: linear-gradient(90deg, #c9a227, #f0d060, #c9a227); }
+        .rank-2::before { background: #aaa; }
+        .rank-3::before { background: #a0522d; }
+        .rank-other::before { background: #1a4d2e; }
 
+        /* ── RANK BADGE ── */
         .rank-badge {
             width: 42px; height: 42px;
             display: inline-flex; align-items: center; justify-content: center;
-            border-radius: 50%; font-weight: bold; font-size: 1.2rem; color: white; margin-right: 12px;
+            border-radius: 50%;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600; font-size: 1.1rem;
+            margin-right: 12px;
+            flex-shrink: 0;
         }
-        .bg-gold { background-color: #FFD700; color: #5c4d00; box-shadow: 0 2px 5px rgba(255,215,0,0.4); }
-        .bg-silver { background-color: #C0C0C0; color: #495057; }
-        .bg-bronze { background-color: #CD7F32; color: #5c3000; }
-        .bg-default { background-color: #024B30; color: white; }
+        .bg-gold   { background: #c9a227; color: #4a3000; }
+        .bg-silver { background: #bbb;    color: #333; }
+        .bg-bronze { background: #a0522d; color: #fff; }
+        .bg-default{ background: #1a4d2e; color: #fff; }
 
-        .move-up { color: #2E8B57; font-weight: bold; font-size: 0.9rem; }
-        .move-down { color: #CB5A36; font-weight: bold; font-size: 0.9rem; }
-        .move-flat { color: #adb5bd; font-weight: bold; font-size: 0.9rem; }
+        /* ── MOVEMENT ARROWS ── */
+        .move-up   { color: #1a6e3a; font-weight: 700; font-size: .85rem; }
+        .move-down { color: #b5451b; font-weight: 700; font-size: .85rem; }
+        .move-flat { color: #ccc;    font-weight: 700; font-size: .85rem; }
 
+        /* ── TEAM NAME / OWNER ── */
+        .team-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin: 0;
+            line-height: 1.2;
+        }
+        .owner-name {
+            color: #aaa;
+            font-size: .75rem;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            margin-top: 2px;
+        }
+
+        /* ── TOTAL POINTS BADGE ── */
+        .total-pts-badge {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #1a4d2e;
+            line-height: 1;
+        }
+        .total-pts-label {
+            font-size: .65rem;
+            color: #aaa;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        /* ── ROSTER TABLE ── */
+        .roster-table th {
+            color: #aaa;
+            font-size: .7rem;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            border-bottom: 2px solid #4b0082 !important;
+            padding: 5px 6px;
+            font-weight: 500;
+        }
+        .roster-table td {
+            border-bottom: .5px solid #f5f2ec;
+            padding: 7px 6px;
+            font-size: .82rem;
+        }
+        .roster-table tbody tr:last-child td { border-bottom: none; }
+        .roster-table tbody tr:hover { background: #f7fbf8; }
+
+        /* ── POINTS PILLS ── */
         .pts-badge {
-            background-color: #CB5A36;
+            background-color: #b5451b;
             color: #fff;
-            font-weight: bold;
-            font-size: 0.75rem;
-            padding: 3px 8px;
+            font-weight: 700;
+            font-size: .7rem;
+            padding: 2px 9px;
             border-radius: 10px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
             display: inline-block;
         }
 
-        /* NEW TABLE STYLES */
-        .roster-table th {
-            color: #7f8c8d;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-bottom: 2px solid #CB5A36 !important;
-        }
-
-        .roster-table td {
-            border-bottom: 1px solid #f0f0f0;
-            padding: 8px 4px;
-        }
-
+        /* ── RECENT RESULT ── */
         .recent-result-text {
-            font-size: 0.7rem;
-            color: #8c9298;
+            font-size: .68rem;
+            color: #aaa;
             font-style: italic;
             margin-top: 2px;
             line-height: 1.1;
         }
 
-        .owner-name {
-            color: #7f8c8d;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: -3px;
+        /* ── PREVIOUS SEASON FOOTER STRIP ── */
+        .prev-strip {
+            background: #f9f4ff;
+            border-top: .5px solid #ede5f8;
+            padding: 7px 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: .72rem;
+            color: #aaa;
         }
+        .prev-strip-label {
+            font-size: .62rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: #c0b090;
+        }
+        .prev-strip-val {
+            font-family: 'Playfair Display', serif;
+            font-size: .9rem;
+            color: #4b0082;
+            font-weight: 600;
+        }
+        .sac-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: #fff5f5;
+            border: .5px solid #f5c2c7;
+            border-radius: 10px;
+            font-size: .68rem;
+            color: #9b2335;
+            padding: 2px 8px;
+            font-style: italic;
+            margin-right: 4px;
+        }
+
+        footer { color: #bbb; font-size: .72rem; letter-spacing: .05em; }
     </style>
 </head>
 <body>
 
-    <div class="hero text-center">
-        <h1 class="display-5 fw-bold">🏴󠁧󠁢󠁳󠁣󠁴󠁿 EVRC Fantasy League 🇨🇦</h1>
-        <p class="lead opacity-75">Roland Garros Edition • Live Standings</p>
+    <!-- HERO -->
+    <div class="hero">
+        <div class="hero-inner">
+            <div class="eyebrow">The Championships · Wimbledon · Fantasy Edition</div>
+            <h1>🏴󠁧󠁢󠁳󠁣󠁴󠁿 EVRC Fantasy League 🇨🇦</h1>
+            <p class="lead">Live Standings · Week 1</p>
+            <div class="hero-chips">
+                <span class="hero-chip">🍓 Wimbledon 2026</span>
+                <span class="hero-chip">🎾 Week 1</span>
+                <span class="hero-chip">🍦 Strawberries &amp; Cream</span>
+            </div>
+        </div>
     </div>
+    <div class="purple-bar"></div>
+    <div class="sac-strip">🍓 Strawberries &amp; Cream · The Wimbledon Tradition since 1877 🍦</div>
 
+    <!-- SPONSOR BANNER -->
     <div class="container text-center">
         <div class="sponsor-banner">
             <span class="ad-tag">Advertisement</span>
-            <span class="text-muted small text-uppercase fw-bold" style="letter-spacing: 1px;">Brought to you by</span><br>
-            <img src="zverez_meme.jpeg" alt="Presenting Sponsor" class="sponsor-img img-fluid">
+            <span class="text-muted small text-uppercase fw-bold" style="letter-spacing:1px;">Brought to you by</span><br>
+            <img src="wimby-sponsor.jpeg" alt="Presenting Sponsor" class="sponsor-img img-fluid">
         </div>
     </div>
 
@@ -138,21 +317,23 @@
             <div class="col-lg-6 mb-4">
                 <div class="card h-100 rank-1">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <div class="d-flex align-items-center">
-                                <span class="rank-badge bg-gold">#1</span>
+
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="d-flex align-items-start">
+                                <span class="rank-badge bg-gold">🏆</span>
                                 <div>
-                                    <h5 class="card-title m-0 fw-bold">Bagels Only</h5>
-                                    <div class="owner-name mb-1">Mgr: Bryan</div>
-                                    <span class="move-up">▲ 1</span>
+                                    <div class="team-name">The Uninformed</div>
+                                    <div class="owner-name">Mgr: Hans</div>
+                                    <div class="mt-1"><span class="move-flat">—</span></div>
                                 </div>
                             </div>
                             <div class="text-end">
-                                <span class="d-block badge fs-5" style="background-color: #024B30;">22120 pts</span>
+                                <div class="total-pts-badge">24,418</div>
+                                <div class="total-pts-label">pts</div>
                             </div>
                         </div>
 
-                        <div class="table-responsive mt-3">
+                        <div class="table-responsive">
                             <table class="table table-borderless table-sm roster-table mb-0">
                                 <thead>
                                     <tr>
@@ -162,132 +343,130 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Jannik Sinner</td>
-                <td class="align-middle text-center"><span class="pts-badge">5150</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">5150</span>
-                    
+                <td class="fw-500" style="color:#222;">Naomi Osaka</td>
+                <td class="text-center"><span class="pts-badge">335</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    772
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Alexander Zverev</td>
-                <td class="align-middle text-center"><span class="pts-badge">4200</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">2400</span>
-                    <div class="recent-result-text">Roland Garros Winner 🏆</div>
+                <td class="fw-500" style="color:#222;">Aryna Sabalenka</td>
+                <td class="text-center"><span class="pts-badge">205</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    4510
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Elena Rybakina</td>
-                <td class="align-middle text-center"><span class="pts-badge">2281</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">2280</span>
-                    <div class="recent-result-text">London R16</div>
+                <td class="fw-500" style="color:#222;">Qinwen Zheng</td>
+                <td class="text-center"><span class="pts-badge">100</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    391
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Casper Ruud</td>
-                <td class="align-middle text-center"><span class="pts-badge">1410</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1410</span>
-                    
+                <td class="fw-500" style="color:#222;">James Duckworth</td>
+                <td class="text-center"><span class="pts-badge">27</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    432
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Iga Świątek</td>
-                <td class="align-middle text-center"><span class="pts-badge">1243</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1243</span>
-                    
+                <td class="fw-500" style="color:#222;">Mirra Andreeva</td>
+                <td class="text-center"><span class="pts-badge">11</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    4928
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Learner Tien</td>
-                <td class="align-middle text-center"><span class="pts-badge">820</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">820</span>
-                    
+                <td class="fw-500" style="color:#222;">Jannik Sinner</td>
+                <td class="text-center"><span class="pts-badge">10</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    5950
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Matteo Berrettini</td>
-                <td class="align-middle text-center"><span class="pts-badge">763</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">563</span>
-                    
+                <td class="fw-500" style="color:#222;">Novak Djoković</td>
+                <td class="text-center"><span class="pts-badge">10</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1510
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Naomi Osaka</td>
-                <td class="align-middle text-center"><span class="pts-badge">610</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">610</span>
-                    
+                <td class="fw-500" style="color:#222;">Jakub Menšík</td>
+                <td class="text-center"><span class="pts-badge">10</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1855
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Qinwen Zheng</td>
-                <td class="align-middle text-center"><span class="pts-badge">391</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">390</span>
-                    <div class="recent-result-text">Lost in London R32</div>
+                <td class="fw-500" style="color:#222;">João Fonseca</td>
+                <td class="text-center"><span class="pts-badge">10</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    950
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Maddison Inglis</td>
-                <td class="align-middle text-center"><span class="pts-badge">31</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">6</span>
-                    <div class="recent-result-text">London R32</div>
+                <td class="fw-500" style="color:#222;">Beatriz Haddad Maia</td>
+                <td class="text-center"><span class="pts-badge">10</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    85
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Austrailian Open 🦘</td>
-                <td class="align-middle text-center"><span class="pts-badge">5221</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">5221</span>
+                <td class="fw-500" style="color:#222;">French Open 🥐</td>
+                <td class="text-center"><span class="pts-badge">16749</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    16749
                     <div class="recent-result-text">-</div>
                 </td>
             </tr>
-            
-                                </tbody>
+            <tr>
+                <td class="fw-500" style="color:#222;">Austrailian Open 🦘</td>
+                <td class="text-center"><span class="pts-badge">6941</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    6941
+                    <div class="recent-result-text">-</div>
+                </td>
+            </tr></tbody>
                             </table>
                         </div>
 
                     </div>
+                    <div class="prev-strip"><span class="sac-tag">🍓 Previous</span><span><span class="prev-strip-label">French Open French Open</span> <span class="prev-strip-val">16,749</span></span><span><span class="prev-strip-label">Austrailian Open Aus. Open</span> <span class="prev-strip-val">6,941</span></span></div>
                 </div>
             </div>
-    
+
             <div class="col-lg-6 mb-4">
                 <div class="card h-100 rank-2">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <div class="d-flex align-items-center">
-                                <span class="rank-badge bg-silver">#2</span>
+
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="d-flex align-items-start">
+                                <span class="rank-badge bg-silver">🥈</span>
                                 <div>
-                                    <h5 class="card-title m-0 fw-bold">KerningCityBoyz</h5>
-                                    <div class="owner-name mb-1">Mgr: Sascha</div>
-                                    <span class="move-down">▼ 1</span>
+                                    <div class="team-name">Alibaba's All Stars </div>
+                                    <div class="owner-name">Mgr: Alistair</div>
+                                    <div class="mt-1"><span class="move-up">▲ 1</span></div>
                                 </div>
                             </div>
                             <div class="text-end">
-                                <span class="d-block badge fs-5" style="background-color: #024B30;">21625 pts</span>
+                                <div class="total-pts-badge">24,304</div>
+                                <div class="total-pts-label">pts</div>
                             </div>
                         </div>
 
-                        <div class="table-responsive mt-3">
+                        <div class="table-responsive">
                             <table class="table table-borderless table-sm roster-table mb-0">
                                 <thead>
                                     <tr>
@@ -297,132 +476,130 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Jannik Sinner</td>
-                <td class="align-middle text-center"><span class="pts-badge">5150</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">5150</span>
-                    
+                <td class="fw-500" style="color:#222;">Iva Jovic</td>
+                <td class="text-center"><span class="pts-badge">204</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1428
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Coco Gauff</td>
-                <td class="align-middle text-center"><span class="pts-badge">2123</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">2123</span>
-                    
+                <td class="fw-500" style="color:#222;">Learner Tien</td>
+                <td class="text-center"><span class="pts-badge">60</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1245
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Daniil Medvedev</td>
-                <td class="align-middle text-center"><span class="pts-badge">1770</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1770</span>
-                    <div class="recent-result-text">s-Hertogenbosch R16</div>
+                <td class="fw-500" style="color:#222;">Magdalena Fręch</td>
+                <td class="text-center"><span class="pts-badge">24</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    733
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Victoria Mboko</td>
-                <td class="align-middle text-center"><span class="pts-badge">1546</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1545</span>
-                    <div class="recent-result-text">London R16</div>
+                <td class="fw-500" style="color:#222;">Iga Świątek</td>
+                <td class="text-center"><span class="pts-badge">11</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1823
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Iga Świątek</td>
-                <td class="align-middle text-center"><span class="pts-badge">1243</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1243</span>
-                    
+                <td class="fw-500" style="color:#222;">Coco Gauff</td>
+                <td class="text-center"><span class="pts-badge">11</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    2703
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Ben Shelton</td>
-                <td class="align-middle text-center"><span class="pts-badge">1230</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1230</span>
-                    <div class="recent-result-text">Stuttgart R16</div>
+                <td class="fw-500" style="color:#222;">Jannik Sinner</td>
+                <td class="text-center"><span class="pts-badge">10</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    5950
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Tommy Paul</td>
-                <td class="align-middle text-center"><span class="pts-badge">1205</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1205</span>
-                    
+                <td class="fw-500" style="color:#222;">Flavio Cobolli</td>
+                <td class="text-center"><span class="pts-badge">10</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    2620
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Hailey Baptiste</td>
-                <td class="align-middle text-center"><span class="pts-badge">961</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">961</span>
-                    
+                <td class="fw-500" style="color:#222;">Jakub Menšík</td>
+                <td class="text-center"><span class="pts-badge">10</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1855
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Emma Raducanu</td>
-                <td class="align-middle text-center"><span class="pts-badge">259</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">258</span>
-                    <div class="recent-result-text">London R32</div>
+                <td class="fw-500" style="color:#222;">Alexander Blockx</td>
+                <td class="text-center"><span class="pts-badge">10</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    955
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Coleman Wong</td>
-                <td class="align-middle text-center"><span class="pts-badge">231</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">223</span>
-                    <div class="recent-result-text">Lost in Qual. 's-Hertogenbosch R1</div>
+                <td class="fw-500" style="color:#222;">Maja Chwalińska</td>
+                <td class="text-center"><span class="pts-badge">10</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1454
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Austrailian Open 🦘</td>
-                <td class="align-middle text-center"><span class="pts-badge">5907</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">5907</span>
+                <td class="fw-500" style="color:#222;">French Open 🥐</td>
+                <td class="text-center"><span class="pts-badge">19404</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    19404
                     <div class="recent-result-text">-</div>
                 </td>
             </tr>
-            
-                                </tbody>
+            <tr>
+                <td class="fw-500" style="color:#222;">Austrailian Open 🦘</td>
+                <td class="text-center"><span class="pts-badge">4540</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    4540
+                    <div class="recent-result-text">-</div>
+                </td>
+            </tr></tbody>
                             </table>
                         </div>
 
                     </div>
+                    <div class="prev-strip"><span class="sac-tag">🍓 Previous</span><span><span class="prev-strip-label">French Open French Open</span> <span class="prev-strip-val">19,404</span></span><span><span class="prev-strip-label">Austrailian Open Aus. Open</span> <span class="prev-strip-val">4,540</span></span></div>
                 </div>
             </div>
-    
+
             <div class="col-lg-6 mb-4">
                 <div class="card h-100 rank-3">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <div class="d-flex align-items-center">
-                                <span class="rank-badge bg-bronze">#3</span>
+
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="d-flex align-items-start">
+                                <span class="rank-badge bg-bronze">🥉</span>
                                 <div>
-                                    <h5 class="card-title m-0 fw-bold">The Uninformed</h5>
-                                    <div class="owner-name mb-1">Mgr: Hans</div>
-                                    <span class="move-up">▲ 3</span>
+                                    <div class="team-name">Bagels Only</div>
+                                    <div class="owner-name">Mgr: Bryan</div>
+                                    <div class="mt-1"><span class="move-up">▲ 3</span></div>
                                 </div>
                             </div>
                             <div class="text-end">
-                                <span class="d-block badge fs-5" style="background-color: #024B30;">18414 pts</span>
+                                <div class="total-pts-badge">23,978</div>
+                                <div class="total-pts-label">pts</div>
                             </div>
                         </div>
 
-                        <div class="table-responsive mt-3">
+                        <div class="table-responsive">
                             <table class="table table-borderless table-sm roster-table mb-0">
                                 <thead>
                                     <tr>
@@ -432,132 +609,130 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Mirra Andreeva</td>
-                <td class="align-middle text-center"><span class="pts-badge">4080</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">2320</span>
-                    
+                <td class="fw-500" style="color:#222;">Taylor Fritz</td>
+                <td class="text-center"><span class="pts-badge">505</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    775
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Carlos Alcaraz</td>
-                <td class="align-middle text-center"><span class="pts-badge">1650</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1650</span>
-                    
+                <td class="fw-500" style="color:#222;">Tommy Paul</td>
+                <td class="text-center"><span class="pts-badge">340</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1505
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Victoria Mboko</td>
-                <td class="align-middle text-center"><span class="pts-badge">1546</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1545</span>
-                    <div class="recent-result-text">London R16</div>
+                <td class="fw-500" style="color:#222;">Tatjana Maria</td>
+                <td class="text-center"><span class="pts-badge">285</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    322
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Jakub Menšík</td>
-                <td class="align-middle text-center"><span class="pts-badge">1360</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">760</span>
-                    
+                <td class="fw-500" style="color:#222;">Alexandra Eala</td>
+                <td class="text-center"><span class="pts-badge">265</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    884
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Iga Świątek</td>
-                <td class="align-middle text-center"><span class="pts-badge">1243</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1243</span>
-                    
+                <td class="fw-500" style="color:#222;">Iva Jovic</td>
+                <td class="text-center"><span class="pts-badge">204</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1428
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Ugo Humbert</td>
-                <td class="align-middle text-center"><span class="pts-badge">660</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">645</span>
-                    <div class="recent-result-text">s-Hertogenbosch R16 (R32 )</div>
+                <td class="fw-500" style="color:#222;">Elena Rybakina</td>
+                <td class="text-center"><span class="pts-badge">118</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    4389
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Qinwen Zheng</td>
-                <td class="align-middle text-center"><span class="pts-badge">391</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">390</span>
-                    <div class="recent-result-text">Lost in London R32</div>
+                <td class="fw-500" style="color:#222;">Alexander Bublik</td>
+                <td class="text-center"><span class="pts-badge">110</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1130
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">James Duckworth</td>
-                <td class="align-middle text-center"><span class="pts-badge">260</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">260</span>
-                    <div class="recent-result-text">Stuttgart R32</div>
+                <td class="fw-500" style="color:#222;">Iga Świątek</td>
+                <td class="text-center"><span class="pts-badge">11</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1823
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Novak Djoković</td>
-                <td class="align-middle text-center"><span class="pts-badge">210</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">210</span>
-                    
+                <td class="fw-500" style="color:#222;">Jannik Sinner</td>
+                <td class="text-center"><span class="pts-badge">10</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    5950
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Beatriz Haddad Maia</td>
-                <td class="align-middle text-center"><span class="pts-badge">73</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">72</span>
-                    <div class="recent-result-text">Lost in Qual. London R1</div>
+                <td class="fw-500" style="color:#222;">Valentin Royer</td>
+                <td class="text-center"><span class="pts-badge">10</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    276
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Austrailian Open 🦘</td>
-                <td class="align-middle text-center"><span class="pts-badge">6941</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">6941</span>
+                <td class="fw-500" style="color:#222;">French Open 🥐</td>
+                <td class="text-center"><span class="pts-badge">16899</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    16899
                     <div class="recent-result-text">-</div>
                 </td>
             </tr>
-            
-                                </tbody>
+            <tr>
+                <td class="fw-500" style="color:#222;">Austrailian Open 🦘</td>
+                <td class="text-center"><span class="pts-badge">5221</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    5221
+                    <div class="recent-result-text">-</div>
+                </td>
+            </tr></tbody>
                             </table>
                         </div>
 
                     </div>
+                    <div class="prev-strip"><span class="sac-tag">🍓 Previous</span><span><span class="prev-strip-label">French Open French Open</span> <span class="prev-strip-val">16,899</span></span><span><span class="prev-strip-label">Austrailian Open Aus. Open</span> <span class="prev-strip-val">5,221</span></span></div>
                 </div>
             </div>
-    
+
             <div class="col-lg-6 mb-4">
-                <div class="card h-100 ">
+                <div class="card h-100 rank-other">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <div class="d-flex align-items-center">
+
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="d-flex align-items-start">
                                 <span class="rank-badge bg-default">#4</span>
                                 <div>
-                                    <h5 class="card-title m-0 fw-bold">Alibaba's All Stars </h5>
-                                    <div class="owner-name mb-1">Mgr: Alistair</div>
-                                    <span class="move-flat">-</span>
+                                    <div class="team-name">Calum</div>
+                                    <div class="owner-name">Mgr: Calum</div>
+                                    <div class="mt-1"><span class="move-up">▲ 3</span></div>
                                 </div>
                             </div>
                             <div class="text-end">
-                                <span class="d-block badge fs-5" style="background-color: #024B30;">18037 pts</span>
+                                <div class="total-pts-badge">23,709</div>
+                                <div class="total-pts-label">pts</div>
                             </div>
                         </div>
 
-                        <div class="table-responsive mt-3">
+                        <div class="table-responsive">
                             <table class="table table-borderless table-sm roster-table mb-0">
                                 <thead>
                                     <tr>
@@ -567,132 +742,130 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Jannik Sinner</td>
-                <td class="align-middle text-center"><span class="pts-badge">5150</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">5150</span>
+                <td class="fw-500" style="color:#222;">Karolína Muchová</td>
+                <td class="text-center"><span class="pts-badge">570</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    2410
+                    <div class="recent-result-text">Wimbledon R128</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-500" style="color:#222;">Ugo Humbert</td>
+                <td class="text-center"><span class="pts-badge">340</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    835
+                    <div class="recent-result-text">Wimbledon R128</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-500" style="color:#222;">Jessica Pegula</td>
+                <td class="text-center"><span class="pts-badge">335</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    3195
+                    <div class="recent-result-text">Wimbledon R128</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-500" style="color:#222;">Daniil Medvedev</td>
+                <td class="text-center"><span class="pts-badge">210</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    2220
+                    <div class="recent-result-text">Wimbledon R128</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-500" style="color:#222;">Elise Mertens</td>
+                <td class="text-center"><span class="pts-badge">130</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1050
+                    <div class="recent-result-text">Wimbledon R128</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-500" style="color:#222;">Iga Świątek</td>
+                <td class="text-center"><span class="pts-badge">11</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1823
+                    <div class="recent-result-text">Wimbledon R128</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-500" style="color:#222;">Elisabetta Cocciaretto</td>
+                <td class="text-center"><span class="pts-badge">11</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    813
+                    <div class="recent-result-text">Wimbledon R128</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-500" style="color:#222;">Novak Djoković</td>
+                <td class="text-center"><span class="pts-badge">10</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1510
+                    <div class="recent-result-text">Wimbledon R128</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-500" style="color:#222;">Matteo Berrettini</td>
+                <td class="text-center"><span class="pts-badge">10</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    763
+                    <div class="recent-result-text">Wimbledon R128</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-500" style="color:#222;">Carlos Alcaraz</td>
+                <td class="text-center"><span class="pts-badge">0</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    3650
                     
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Victoria Mboko</td>
-                <td class="align-middle text-center"><span class="pts-badge">1546</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1545</span>
-                    <div class="recent-result-text">London R16</div>
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Jakub Menšík</td>
-                <td class="align-middle text-center"><span class="pts-badge">1360</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">760</span>
-                    
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Iga Świątek</td>
-                <td class="align-middle text-center"><span class="pts-badge">1243</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1243</span>
-                    
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Learner Tien</td>
-                <td class="align-middle text-center"><span class="pts-badge">820</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">820</span>
-                    
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Alexander Blockx</td>
-                <td class="align-middle text-center"><span class="pts-badge">804</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">804</span>
-                    
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Amanda Anisimova</td>
-                <td class="align-middle text-center"><span class="pts-badge">771</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">770</span>
-                    <div class="recent-result-text">London R16</div>
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Leylah Fernandez</td>
-                <td class="align-middle text-center"><span class="pts-badge">662</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">661</span>
-                    <div class="recent-result-text">London R32</div>
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Magdalena Fręch</td>
-                <td class="align-middle text-center"><span class="pts-badge">601</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">601</span>
-                    
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Taylor Fritz</td>
-                <td class="align-middle text-center"><span class="pts-badge">540</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">540</span>
-                    <div class="recent-result-text">Stuttgart R16</div>
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Austrailian Open 🦘</td>
-                <td class="align-middle text-center"><span class="pts-badge">4540</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">4540</span>
+                <td class="fw-500" style="color:#222;">French Open 🥐</td>
+                <td class="text-center"><span class="pts-badge">16847</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    16847
                     <div class="recent-result-text">-</div>
                 </td>
             </tr>
-            
-                                </tbody>
+            <tr>
+                <td class="fw-500" style="color:#222;">Austrailian Open 🦘</td>
+                <td class="text-center"><span class="pts-badge">5235</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    5235
+                    <div class="recent-result-text">-</div>
+                </td>
+            </tr></tbody>
                             </table>
                         </div>
 
                     </div>
+                    <div class="prev-strip"><span class="sac-tag">🍓 Previous</span><span><span class="prev-strip-label">French Open French Open</span> <span class="prev-strip-val">16,847</span></span><span><span class="prev-strip-label">Austrailian Open Aus. Open</span> <span class="prev-strip-val">5,235</span></span></div>
                 </div>
             </div>
-    
+
             <div class="col-lg-6 mb-4">
-                <div class="card h-100 ">
+                <div class="card h-100 rank-other">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <div class="d-flex align-items-center">
+
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="d-flex align-items-start">
                                 <span class="rank-badge bg-default">#5</span>
                                 <div>
-                                    <h5 class="card-title m-0 fw-bold">Hola A Todos</h5>
-                                    <div class="owner-name mb-1">Mgr: Duncan</div>
-                                    <span class="move-down">▼ 2</span>
+                                    <div class="team-name">KerningCityBoyz</div>
+                                    <div class="owner-name">Mgr: Sascha</div>
+                                    <div class="mt-1"><span class="move-down">▼ 1</span></div>
                                 </div>
                             </div>
                             <div class="text-end">
-                                <span class="d-block badge fs-5" style="background-color: #024B30;">17800 pts</span>
+                                <div class="total-pts-badge">22,870</div>
+                                <div class="total-pts-label">pts</div>
                             </div>
                         </div>
 
-                        <div class="table-responsive mt-3">
+                        <div class="table-responsive">
                             <table class="table table-borderless table-sm roster-table mb-0">
                                 <thead>
                                     <tr>
@@ -702,132 +875,130 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Coco Gauff</td>
-                <td class="align-middle text-center"><span class="pts-badge">2123</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">2123</span>
+                <td class="fw-500" style="color:#222;">Frances Tiafoe</td>
+                <td class="text-center"><span class="pts-badge">485</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1255
+                    <div class="recent-result-text">Wimbledon R128</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-500" style="color:#222;">Emma Raducanu</td>
+                <td class="text-center"><span class="pts-badge">324</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    385
                     
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Carlos Alcaraz</td>
-                <td class="align-middle text-center"><span class="pts-badge">1650</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1650</span>
+                <td class="fw-500" style="color:#222;">Daniil Medvedev</td>
+                <td class="text-center"><span class="pts-badge">210</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    2220
+                    <div class="recent-result-text">Wimbledon R128</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-500" style="color:#222;">Félix Auger-Aliassime</td>
+                <td class="text-center"><span class="pts-badge">125</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1675
+                    <div class="recent-result-text">Wimbledon R128</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-500" style="color:#222;">Gabriel Diallo</td>
+                <td class="text-center"><span class="pts-badge">60</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    195
+                    <div class="recent-result-text">Wimbledon R128</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-500" style="color:#222;">Iga Świątek</td>
+                <td class="text-center"><span class="pts-badge">11</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1823
+                    <div class="recent-result-text">Wimbledon R128</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-500" style="color:#222;">Coco Gauff</td>
+                <td class="text-center"><span class="pts-badge">11</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    2703
+                    <div class="recent-result-text">Wimbledon R128</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-500" style="color:#222;">Jannik Sinner</td>
+                <td class="text-center"><span class="pts-badge">10</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    5950
+                    <div class="recent-result-text">Wimbledon R128</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-500" style="color:#222;">Marta Kostyuk</td>
+                <td class="text-center"><span class="pts-badge">9</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    2496
+                    <div class="recent-result-text">Wimbledon R128</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-500" style="color:#222;">Hailey Baptiste</td>
+                <td class="text-center"><span class="pts-badge">0</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1153
                     
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Victoria Mboko</td>
-                <td class="align-middle text-center"><span class="pts-badge">1546</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1545</span>
-                    <div class="recent-result-text">London R16</div>
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Rafael Jódar</td>
-                <td class="align-middle text-center"><span class="pts-badge">1420</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1220</span>
-                    
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Casper Ruud</td>
-                <td class="align-middle text-center"><span class="pts-badge">1410</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1410</span>
-                    
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Iga Świątek</td>
-                <td class="align-middle text-center"><span class="pts-badge">1243</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1243</span>
-                    
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Alex De Minaur</td>
-                <td class="align-middle text-center"><span class="pts-badge">1130</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1130</span>
-                    <div class="recent-result-text">s-Hertogenbosch R16</div>
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Learner Tien</td>
-                <td class="align-middle text-center"><span class="pts-badge">820</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">820</span>
-                    
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Alexandra Eala</td>
-                <td class="align-middle text-center"><span class="pts-badge">745</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">744</span>
-                    <div class="recent-result-text">London R32</div>
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Olga Danilović</td>
-                <td class="align-middle text-center"><span class="pts-badge">29</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">29</span>
-                    
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Austrailian Open 🦘</td>
-                <td class="align-middle text-center"><span class="pts-badge">5684</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">5684</span>
+                <td class="fw-500" style="color:#222;">French Open 🥐</td>
+                <td class="text-center"><span class="pts-badge">15718</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    15718
                     <div class="recent-result-text">-</div>
                 </td>
             </tr>
-            
-                                </tbody>
+            <tr>
+                <td class="fw-500" style="color:#222;">Austrailian Open 🦘</td>
+                <td class="text-center"><span class="pts-badge">5907</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    5907
+                    <div class="recent-result-text">-</div>
+                </td>
+            </tr></tbody>
                             </table>
                         </div>
 
                     </div>
+                    <div class="prev-strip"><span class="sac-tag">🍓 Previous</span><span><span class="prev-strip-label">French Open French Open</span> <span class="prev-strip-val">15,718</span></span><span><span class="prev-strip-label">Austrailian Open Aus. Open</span> <span class="prev-strip-val">5,907</span></span></div>
                 </div>
             </div>
-    
+
             <div class="col-lg-6 mb-4">
-                <div class="card h-100 ">
+                <div class="card h-100 rank-other">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <div class="d-flex align-items-center">
+
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="d-flex align-items-start">
                                 <span class="rank-badge bg-default">#6</span>
                                 <div>
-                                    <h5 class="card-title m-0 fw-bold">Team Alex</h5>
-                                    <div class="owner-name mb-1">Mgr: Alex J</div>
-                                    <span class="move-up">▲ 1</span>
+                                    <div class="team-name">Team Alex</div>
+                                    <div class="owner-name">Mgr: Alex J</div>
+                                    <div class="mt-1"><span class="move-up">▲ 3</span></div>
                                 </div>
                             </div>
                             <div class="text-end">
-                                <span class="d-block badge fs-5" style="background-color: #024B30;">17333 pts</span>
+                                <div class="total-pts-badge">22,786</div>
+                                <div class="total-pts-label">pts</div>
                             </div>
                         </div>
 
-                        <div class="table-responsive mt-3">
+                        <div class="table-responsive">
                             <table class="table table-borderless table-sm roster-table mb-0">
                                 <thead>
                                     <tr>
@@ -837,132 +1008,130 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Alexander Zverev</td>
-                <td class="align-middle text-center"><span class="pts-badge">4200</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">2400</span>
-                    <div class="recent-result-text">Roland Garros Winner 🏆</div>
+                <td class="fw-500" style="color:#222;">Alejandro Davidovich Fokina</td>
+                <td class="text-center"><span class="pts-badge">360</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    660
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Aryna Sabalenka</td>
-                <td class="align-middle text-center"><span class="pts-badge">2710</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">2520</span>
-                    
+                <td class="fw-500" style="color:#222;">Alexandra Eala</td>
+                <td class="text-center"><span class="pts-badge">265</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    884
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Carlos Alcaraz</td>
-                <td class="align-middle text-center"><span class="pts-badge">1650</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1650</span>
-                    
+                <td class="fw-500" style="color:#222;">Alexander Zverev</td>
+                <td class="text-center"><span class="pts-badge">210</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    5040
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Amanda Anisimova</td>
-                <td class="align-middle text-center"><span class="pts-badge">771</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">770</span>
-                    <div class="recent-result-text">London R16</div>
+                <td class="fw-500" style="color:#222;">Aryna Sabalenka</td>
+                <td class="text-center"><span class="pts-badge">205</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    4510
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Alexandra Eala</td>
-                <td class="align-middle text-center"><span class="pts-badge">745</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">744</span>
-                    <div class="recent-result-text">London R32</div>
+                <td class="fw-500" style="color:#222;">Ekaterina Alexandrova</td>
+                <td class="text-center"><span class="pts-badge">178</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    574
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Alex Michelsen</td>
-                <td class="align-middle text-center"><span class="pts-badge">510</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">500</span>
-                    
+                <td class="fw-500" style="color:#222;">Félix Auger-Aliassime</td>
+                <td class="text-center"><span class="pts-badge">125</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1675
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Ekaterina Alexandrova</td>
-                <td class="align-middle text-center"><span class="pts-badge">502</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">501</span>
-                    <div class="recent-result-text">Lost in 's-Hertogenbosch R32</div>
+                <td class="fw-500" style="color:#222;">Amanda Anisimova</td>
+                <td class="text-center"><span class="pts-badge">117</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1261
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Alejandro Davidovich Fokina</td>
-                <td class="align-middle text-center"><span class="pts-badge">460</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">460</span>
-                    <div class="recent-result-text">Lost in Stuttgart R32</div>
+                <td class="fw-500" style="color:#222;">Alexander Bublik</td>
+                <td class="text-center"><span class="pts-badge">110</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1130
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Alexei Popyrin</td>
-                <td class="align-middle text-center"><span class="pts-badge">300</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">300</span>
-                    
+                <td class="fw-500" style="color:#222;">Aliaksandra Sasnovich</td>
+                <td class="text-center"><span class="pts-badge">31</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    348
+                    <div class="recent-result-text">Lost in Qual. Wimbledon R3</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Aliaksandra Sasnovich</td>
-                <td class="align-middle text-center"><span class="pts-badge">209</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">208</span>
-                    <div class="recent-result-text">Lost in Qual. London R1</div>
+                <td class="fw-500" style="color:#222;">Aleksandar Kovačević</td>
+                <td class="text-center"><span class="pts-badge">13</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    564
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Austrailian Open 🦘</td>
-                <td class="align-middle text-center"><span class="pts-badge">5276</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">5276</span>
+                <td class="fw-500" style="color:#222;">French Open 🥐</td>
+                <td class="text-center"><span class="pts-badge">15896</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    15896
                     <div class="recent-result-text">-</div>
                 </td>
             </tr>
-            
-                                </tbody>
+            <tr>
+                <td class="fw-500" style="color:#222;">Austrailian Open 🦘</td>
+                <td class="text-center"><span class="pts-badge">5276</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    5276
+                    <div class="recent-result-text">-</div>
+                </td>
+            </tr></tbody>
                             </table>
                         </div>
 
                     </div>
+                    <div class="prev-strip"><span class="sac-tag">🍓 Previous</span><span><span class="prev-strip-label">French Open French Open</span> <span class="prev-strip-val">15,896</span></span><span><span class="prev-strip-label">Austrailian Open Aus. Open</span> <span class="prev-strip-val">5,276</span></span></div>
                 </div>
             </div>
-    
+
             <div class="col-lg-6 mb-4">
-                <div class="card h-100 ">
+                <div class="card h-100 rank-other">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <div class="d-flex align-items-center">
+
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="d-flex align-items-start">
                                 <span class="rank-badge bg-default">#7</span>
                                 <div>
-                                    <h5 class="card-title m-0 fw-bold">We are Charlos Kirkaraz </h5>
-                                    <div class="owner-name mb-1">Mgr: Adrian</div>
-                                    <span class="move-up">▲ 2</span>
+                                    <div class="team-name">Hola A Todos</div>
+                                    <div class="owner-name">Mgr: Duncan</div>
+                                    <div class="mt-1"><span class="move-down">▼ 2</span></div>
                                 </div>
                             </div>
                             <div class="text-end">
-                                <span class="d-block badge fs-5" style="background-color: #024B30;">17025 pts</span>
+                                <div class="total-pts-badge">22,686</div>
+                                <div class="total-pts-label">pts</div>
                             </div>
                         </div>
 
-                        <div class="table-responsive mt-3">
+                        <div class="table-responsive">
                             <table class="table table-borderless table-sm roster-table mb-0">
                                 <thead>
                                     <tr>
@@ -972,132 +1141,130 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Alexander Zverev</td>
-                <td class="align-middle text-center"><span class="pts-badge">4200</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">2400</span>
-                    <div class="recent-result-text">Roland Garros Winner 🏆</div>
+                <td class="fw-500" style="color:#222;">Alexandra Eala</td>
+                <td class="text-center"><span class="pts-badge">265</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    884
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Carlos Alcaraz</td>
-                <td class="align-middle text-center"><span class="pts-badge">1650</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1650</span>
-                    
+                <td class="fw-500" style="color:#222;">Daniil Medvedev</td>
+                <td class="text-center"><span class="pts-badge">210</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    2220
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Victoria Mboko</td>
-                <td class="align-middle text-center"><span class="pts-badge">1546</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1545</span>
-                    <div class="recent-result-text">London R16</div>
+                <td class="fw-500" style="color:#222;">Iva Jovic</td>
+                <td class="text-center"><span class="pts-badge">204</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1428
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Casper Ruud</td>
-                <td class="align-middle text-center"><span class="pts-badge">1410</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1410</span>
-                    
+                <td class="fw-500" style="color:#222;">Karolína Plíšková</td>
+                <td class="text-center"><span class="pts-badge">156</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    774
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Iga Świątek</td>
-                <td class="align-middle text-center"><span class="pts-badge">1243</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1243</span>
-                    
+                <td class="fw-500" style="color:#222;">Alexander Bublik</td>
+                <td class="text-center"><span class="pts-badge">110</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1130
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Learner Tien</td>
-                <td class="align-middle text-center"><span class="pts-badge">820</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">820</span>
-                    
+                <td class="fw-500" style="color:#222;">Learner Tien</td>
+                <td class="text-center"><span class="pts-badge">60</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1245
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Amanda Anisimova</td>
-                <td class="align-middle text-center"><span class="pts-badge">771</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">770</span>
-                    <div class="recent-result-text">London R16</div>
+                <td class="fw-500" style="color:#222;">Iga Świątek</td>
+                <td class="text-center"><span class="pts-badge">11</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1823
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Alexandra Eala</td>
-                <td class="align-middle text-center"><span class="pts-badge">745</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">744</span>
-                    <div class="recent-result-text">London R32</div>
+                <td class="fw-500" style="color:#222;">Coco Gauff</td>
+                <td class="text-center"><span class="pts-badge">11</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    2703
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Alexandra Eala</td>
-                <td class="align-middle text-center"><span class="pts-badge">745</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">744</span>
-                    <div class="recent-result-text">London R32</div>
+                <td class="fw-500" style="color:#222;">Jannik Sinner</td>
+                <td class="text-center"><span class="pts-badge">10</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    5950
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Stan Wawrinka</td>
-                <td class="align-middle text-center"><span class="pts-badge">170</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">170</span>
-                    
+                <td class="fw-500" style="color:#222;">Rafael Jódar</td>
+                <td class="text-center"><span class="pts-badge">10</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1569
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Austrailian Open 🦘</td>
-                <td class="align-middle text-center"><span class="pts-badge">3725</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">3725</span>
+                <td class="fw-500" style="color:#222;">French Open 🥐</td>
+                <td class="text-center"><span class="pts-badge">15955</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    15955
                     <div class="recent-result-text">-</div>
                 </td>
             </tr>
-            
-                                </tbody>
+            <tr>
+                <td class="fw-500" style="color:#222;">Austrailian Open 🦘</td>
+                <td class="text-center"><span class="pts-badge">5684</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    5684
+                    <div class="recent-result-text">-</div>
+                </td>
+            </tr></tbody>
                             </table>
                         </div>
 
                     </div>
+                    <div class="prev-strip"><span class="sac-tag">🍓 Previous</span><span><span class="prev-strip-label">French Open French Open</span> <span class="prev-strip-val">15,955</span></span><span><span class="prev-strip-label">Austrailian Open Aus. Open</span> <span class="prev-strip-val">5,684</span></span></div>
                 </div>
             </div>
-    
+
             <div class="col-lg-6 mb-4">
-                <div class="card h-100 ">
+                <div class="card h-100 rank-other">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <div class="d-flex align-items-center">
+
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="d-flex align-items-start">
                                 <span class="rank-badge bg-default">#8</span>
                                 <div>
-                                    <h5 class="card-title m-0 fw-bold">Game, Set, Haggis</h5>
-                                    <div class="owner-name mb-1">Mgr: Ciaran</div>
-                                    <span class="move-flat">-</span>
+                                    <div class="team-name">Game, Set, Haggis</div>
+                                    <div class="owner-name">Mgr: Ciaran</div>
+                                    <div class="mt-1"><span class="move-down">▼ 6</span></div>
                                 </div>
                             </div>
                             <div class="text-end">
-                                <span class="d-block badge fs-5" style="background-color: #024B30;">17012 pts</span>
+                                <div class="total-pts-badge">22,548</div>
+                                <div class="total-pts-label">pts</div>
                             </div>
                         </div>
 
-                        <div class="table-responsive mt-3">
+                        <div class="table-responsive">
                             <table class="table table-borderless table-sm roster-table mb-0">
                                 <thead>
                                     <tr>
@@ -1107,132 +1274,130 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Mirra Andreeva</td>
-                <td class="align-middle text-center"><span class="pts-badge">4080</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">2320</span>
-                    
+                <td class="fw-500" style="color:#222;">Madison Keys</td>
+                <td class="text-center"><span class="pts-badge">368</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1086
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Elena Rybakina</td>
-                <td class="align-middle text-center"><span class="pts-badge">2281</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">2280</span>
-                    <div class="recent-result-text">London R16</div>
+                <td class="fw-500" style="color:#222;">Katie Boulter</td>
+                <td class="text-center"><span class="pts-badge">205</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    655
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Carlos Alcaraz</td>
-                <td class="align-middle text-center"><span class="pts-badge">1650</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1650</span>
-                    
+                <td class="fw-500" style="color:#222;">Iva Jovic</td>
+                <td class="text-center"><span class="pts-badge">204</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1428
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Casper Ruud</td>
-                <td class="align-middle text-center"><span class="pts-badge">1410</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1410</span>
-                    
+                <td class="fw-500" style="color:#222;">Elena Rybakina</td>
+                <td class="text-center"><span class="pts-badge">118</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    4389
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Alex De Minaur</td>
-                <td class="align-middle text-center"><span class="pts-badge">1130</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1130</span>
-                    <div class="recent-result-text">s-Hertogenbosch R16</div>
+                <td class="fw-500" style="color:#222;">Learner Tien</td>
+                <td class="text-center"><span class="pts-badge">60</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1245
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Learner Tien</td>
-                <td class="align-middle text-center"><span class="pts-badge">820</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">820</span>
-                    
+                <td class="fw-500" style="color:#222;">Mirra Andreeva</td>
+                <td class="text-center"><span class="pts-badge">11</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    4928
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Alexandra Eala</td>
-                <td class="align-middle text-center"><span class="pts-badge">745</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">744</span>
-                    <div class="recent-result-text">London R32</div>
+                <td class="fw-500" style="color:#222;">Jannik Sinner</td>
+                <td class="text-center"><span class="pts-badge">10</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    5950
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Iva Jovic</td>
-                <td class="align-middle text-center"><span class="pts-badge">737</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">736</span>
-                    <div class="recent-result-text">London R32</div>
+                <td class="fw-500" style="color:#222;">Novak Djoković</td>
+                <td class="text-center"><span class="pts-badge">10</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1510
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Stan Wawrinka</td>
-                <td class="align-middle text-center"><span class="pts-badge">170</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">170</span>
-                    
+                <td class="fw-500" style="color:#222;">Casper Ruud</td>
+                <td class="text-center"><span class="pts-badge">10</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1665
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Elsa Jacquemot</td>
-                <td class="align-middle text-center"><span class="pts-badge">150</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">149</span>
-                    <div class="recent-result-text">Lost in Qual. London R1</div>
+                <td class="fw-500" style="color:#222;">Stan Wawrinka</td>
+                <td class="text-center"><span class="pts-badge">0</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    310
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Austrailian Open 🦘</td>
-                <td class="align-middle text-center"><span class="pts-badge">3839</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">3839</span>
+                <td class="fw-500" style="color:#222;">French Open 🥐</td>
+                <td class="text-center"><span class="pts-badge">17713</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    17713
                     <div class="recent-result-text">-</div>
                 </td>
             </tr>
-            
-                                </tbody>
+            <tr>
+                <td class="fw-500" style="color:#222;">Austrailian Open 🦘</td>
+                <td class="text-center"><span class="pts-badge">3839</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    3839
+                    <div class="recent-result-text">-</div>
+                </td>
+            </tr></tbody>
                             </table>
                         </div>
 
                     </div>
+                    <div class="prev-strip"><span class="sac-tag">🍓 Previous</span><span><span class="prev-strip-label">French Open French Open</span> <span class="prev-strip-val">17,713</span></span><span><span class="prev-strip-label">Austrailian Open Aus. Open</span> <span class="prev-strip-val">3,839</span></span></div>
                 </div>
             </div>
-    
+
             <div class="col-lg-6 mb-4">
-                <div class="card h-100 ">
+                <div class="card h-100 rank-other">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <div class="d-flex align-items-center">
+
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="d-flex align-items-start">
                                 <span class="rank-badge bg-default">#9</span>
                                 <div>
-                                    <h5 class="card-title m-0 fw-bold">Calum</h5>
-                                    <div class="owner-name mb-1">Mgr: Calum</div>
-                                    <span class="move-down">▼ 4</span>
+                                    <div class="team-name">Maldives Marauders</div>
+                                    <div class="owner-name">Mgr: Alex F</div>
+                                    <div class="mt-1"><span class="move-down">▼ 1</span></div>
                                 </div>
                             </div>
                             <div class="text-end">
-                                <span class="d-block badge fs-5" style="background-color: #024B30;">16861 pts</span>
+                                <div class="total-pts-badge">22,514</div>
+                                <div class="total-pts-label">pts</div>
                             </div>
                         </div>
 
-                        <div class="table-responsive mt-3">
+                        <div class="table-responsive">
                             <table class="table table-borderless table-sm roster-table mb-0">
                                 <thead>
                                     <tr>
@@ -1242,132 +1407,130 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Jessica Pegula</td>
-                <td class="align-middle text-center"><span class="pts-badge">2220</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">2220</span>
-                    
+                <td class="fw-500" style="color:#222;">Karolína Muchová</td>
+                <td class="text-center"><span class="pts-badge">570</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    2410
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Karolína Muchová</td>
-                <td class="align-middle text-center"><span class="pts-badge">1975</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1975</span>
-                    
+                <td class="fw-500" style="color:#222;">Taylor Fritz</td>
+                <td class="text-center"><span class="pts-badge">505</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    775
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Daniil Medvedev</td>
-                <td class="align-middle text-center"><span class="pts-badge">1770</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1770</span>
-                    <div class="recent-result-text">s-Hertogenbosch R16</div>
+                <td class="fw-500" style="color:#222;">Madison Keys</td>
+                <td class="text-center"><span class="pts-badge">368</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1086
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Carlos Alcaraz</td>
-                <td class="align-middle text-center"><span class="pts-badge">1650</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1650</span>
-                    
+                <td class="fw-500" style="color:#222;">Naomi Osaka</td>
+                <td class="text-center"><span class="pts-badge">335</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    772
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Iga Świątek</td>
-                <td class="align-middle text-center"><span class="pts-badge">1243</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1243</span>
-                    
+                <td class="fw-500" style="color:#222;">Alexandra Eala</td>
+                <td class="text-center"><span class="pts-badge">265</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    884
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Matteo Berrettini</td>
-                <td class="align-middle text-center"><span class="pts-badge">763</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">563</span>
-                    
+                <td class="fw-500" style="color:#222;">Aryna Sabalenka</td>
+                <td class="text-center"><span class="pts-badge">205</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    4510
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Ugo Humbert</td>
-                <td class="align-middle text-center"><span class="pts-badge">660</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">645</span>
-                    <div class="recent-result-text">s-Hertogenbosch R16 (R32 )</div>
+                <td class="fw-500" style="color:#222;">Jiří Lehečka</td>
+                <td class="text-center"><span class="pts-badge">160</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1255
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Elise Mertens</td>
-                <td class="align-middle text-center"><span class="pts-badge">660</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">630</span>
-                    <div class="recent-result-text">s-Hertogenbosch R16 (R32 )</div>
+                <td class="fw-500" style="color:#222;">Jack Draper</td>
+                <td class="text-center"><span class="pts-badge">110</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    260
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Elisabetta Cocciaretto</td>
-                <td class="align-middle text-center"><span class="pts-badge">475</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">475</span>
-                    
+                <td class="fw-500" style="color:#222;">Jannik Sinner</td>
+                <td class="text-center"><span class="pts-badge">10</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    5950
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Novak Djoković</td>
-                <td class="align-middle text-center"><span class="pts-badge">210</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">210</span>
-                    
+                <td class="fw-500" style="color:#222;">Jakub Menšík</td>
+                <td class="text-center"><span class="pts-badge">10</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1855
+                    <div class="recent-result-text">Wimbledon R128</div>
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Austrailian Open 🦘</td>
-                <td class="align-middle text-center"><span class="pts-badge">5235</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">5235</span>
+                <td class="fw-500" style="color:#222;">French Open 🥐</td>
+                <td class="text-center"><span class="pts-badge">16137</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    16137
                     <div class="recent-result-text">-</div>
                 </td>
             </tr>
-            
-                                </tbody>
+            <tr>
+                <td class="fw-500" style="color:#222;">Austrailian Open 🦘</td>
+                <td class="text-center"><span class="pts-badge">3839</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    3839
+                    <div class="recent-result-text">-</div>
+                </td>
+            </tr></tbody>
                             </table>
                         </div>
 
                     </div>
+                    <div class="prev-strip"><span class="sac-tag">🍓 Previous</span><span><span class="prev-strip-label">French Open French Open</span> <span class="prev-strip-val">16,137</span></span><span><span class="prev-strip-label">Austrailian Open Aus. Open</span> <span class="prev-strip-val">3,839</span></span></div>
                 </div>
             </div>
-    
+
             <div class="col-lg-6 mb-4">
-                <div class="card h-100 ">
+                <div class="card h-100 rank-other">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <div class="d-flex align-items-center">
+
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="d-flex align-items-start">
                                 <span class="rank-badge bg-default">#10</span>
                                 <div>
-                                    <h5 class="card-title m-0 fw-bold">Maldives Marauders</h5>
-                                    <div class="owner-name mb-1">Mgr: Alex F</div>
-                                    <span class="move-flat">-</span>
+                                    <div class="team-name">We are Charlos Kirkaraz </div>
+                                    <div class="owner-name">Mgr: Adrian</div>
+                                    <div class="mt-1"><span class="move-flat">—</span></div>
                                 </div>
                             </div>
                             <div class="text-end">
-                                <span class="d-block badge fs-5" style="background-color: #024B30;">14292 pts</span>
+                                <div class="total-pts-badge">18,236</div>
+                                <div class="total-pts-label">pts</div>
                             </div>
                         </div>
 
-                        <div class="table-responsive mt-3">
+                        <div class="table-responsive">
                             <table class="table table-borderless table-sm roster-table mb-0">
                                 <thead>
                                     <tr>
@@ -1377,118 +1540,114 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Coco Gauff</td>
-                <td class="align-middle text-center"><span class="pts-badge">2123</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">2123</span>
+                <td class="fw-500" style="color:#222;">Emma Raducanu</td>
+                <td class="text-center"><span class="pts-badge">324</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    385
                     
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Carlos Alcaraz</td>
-                <td class="align-middle text-center"><span class="pts-badge">1650</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1650</span>
+                <td class="fw-500" style="color:#222;">Alexandra Eala</td>
+                <td class="text-center"><span class="pts-badge">265</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    884
+                    <div class="recent-result-text">Wimbledon R128</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-500" style="color:#222;">Alexander Zverev</td>
+                <td class="text-center"><span class="pts-badge">210</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    5040
+                    <div class="recent-result-text">Wimbledon R128</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-500" style="color:#222;">Iva Jovic</td>
+                <td class="text-center"><span class="pts-badge">204</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1428
+                    <div class="recent-result-text">Wimbledon R128</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-500" style="color:#222;">Amanda Anisimova</td>
+                <td class="text-center"><span class="pts-badge">117</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1261
+                    <div class="recent-result-text">Wimbledon R128</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-500" style="color:#222;">Learner Tien</td>
+                <td class="text-center"><span class="pts-badge">60</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1245
+                    <div class="recent-result-text">Wimbledon R128</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-500" style="color:#222;">Iga Świątek</td>
+                <td class="text-center"><span class="pts-badge">11</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1823
+                    <div class="recent-result-text">Wimbledon R128</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-500" style="color:#222;">Jakub Menšík</td>
+                <td class="text-center"><span class="pts-badge">10</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    1855
+                    <div class="recent-result-text">Wimbledon R128</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-500" style="color:#222;">Dino Prižmić</td>
+                <td class="text-center"><span class="pts-badge">10</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    468
+                    <div class="recent-result-text">Wimbledon R128</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-500" style="color:#222;">Carlos Alcaraz</td>
+                <td class="text-center"><span class="pts-badge">0</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    3650
                     
                 </td>
             </tr>
-            
             <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Casper Ruud</td>
-                <td class="align-middle text-center"><span class="pts-badge">1630</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1630</span>
-                    
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Jiří Lehečka</td>
-                <td class="align-middle text-center"><span class="pts-badge">1255</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1255</span>
-                    <div class="recent-result-text">Stuttgart R16</div>
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Iga Świątek</td>
-                <td class="align-middle text-center"><span class="pts-badge">1243</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">1243</span>
-                    
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Alexandra Eala</td>
-                <td class="align-middle text-center"><span class="pts-badge">745</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">744</span>
-                    <div class="recent-result-text">London R32</div>
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Madison Keys</td>
-                <td class="align-middle text-center"><span class="pts-badge">630</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">630</span>
-                    
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Ethan Quinn</td>
-                <td class="align-middle text-center"><span class="pts-badge">466</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">466</span>
-                    
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Qinwen Zheng</td>
-                <td class="align-middle text-center"><span class="pts-badge">391</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">390</span>
-                    <div class="recent-result-text">Lost in London R32</div>
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Lorenzo Musetti</td>
-                <td class="align-middle text-center"><span class="pts-badge">320</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">320</span>
-                    
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="align-middle fw-bold" style="font-size: 0.85rem; color: #333;">Austrailian Open 🦘</td>
-                <td class="align-middle text-center"><span class="pts-badge">3839</span></td>
-                <td class="align-middle text-end">
-                    <span style="font-size: 0.85rem; font-weight: 600; color: #555;">3839</span>
+                <td class="fw-500" style="color:#222;">French Open 🥐</td>
+                <td class="text-center"><span class="pts-badge">13300</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    13300
                     <div class="recent-result-text">-</div>
                 </td>
             </tr>
-            
-                                </tbody>
+            <tr>
+                <td class="fw-500" style="color:#222;">Austrailian Open 🦘</td>
+                <td class="text-center"><span class="pts-badge">3725</span></td>
+                <td class="text-end" style="color:#777;font-weight:500;">
+                    3725
+                    <div class="recent-result-text">-</div>
+                </td>
+            </tr></tbody>
                             </table>
                         </div>
 
                     </div>
+                    <div class="prev-strip"><span class="sac-tag">🍓 Previous</span><span><span class="prev-strip-label">French Open French Open</span> <span class="prev-strip-val">13,300</span></span><span><span class="prev-strip-label">Austrailian Open Aus. Open</span> <span class="prev-strip-val">3,725</span></span></div>
                 </div>
             </div>
-    
+
         </div>
 
-        <footer class="text-center py-5 text-muted">
-            <small>Updated via Python • Hosted on GitHub Pages</small>
+        <footer class="text-center py-5">
+            <div>🍓 &nbsp; Updated via Python · EVRC Fantasy · Wimbledon 2026 &nbsp; 🍓</div>
         </footer>
     </div>
 
